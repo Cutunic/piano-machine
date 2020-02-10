@@ -1,0 +1,33 @@
+.keypad{
+}
+.white{
+    height: 16em;
+    width: 3em;
+    z-index: 1;
+    background-color: white;
+
+    border: 1px solid black;
+    
+}
+.white:active{
+    background-color: rgb(231, 221, 218);
+}
+.black{
+    height: 8em;
+    width: 2em;
+    z-index: 2;
+    margin: 0 -1em;
+    background-color: black;
+    color: white;
+}
+.black:active{
+    background-color: rgb(44, 42, 42);
+}
+ul{
+    position: relative;
+}
+ul li{
+    list-style: none;
+    position: relative;
+    float: left;
+}

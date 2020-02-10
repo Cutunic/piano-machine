@@ -1,0 +1,10 @@
+.piano{
+    display: grid;
+    grid-template-rows: repeat(2,auto);
+    width: 24em;
+    margin: auto;
+}
+.settings{
+    display: grid;
+    grid-template-columns: repeat(3,auto);
+}
