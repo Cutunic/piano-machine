@@ -1,16 +1,9 @@
-<ul class="keypad">
-    <li class="white"><app-key></app-key></li>
-    <li class="black"><app-key></app-key></li>
-    <li class="white"><app-key></app-key></li>
-    <li class="black"><app-key></app-key></li>
-    <li class="white"><app-key></app-key></li>
-    <li class="white"><app-key></app-key></li>
-    <li class="black"><app-key></app-key></li>
-    <li class="white"><app-key></app-key></li>
-    <li class="black"><app-key></app-key></li>
-    <li class="white"><app-key></app-key></li>
-    <li class="black"><app-key></app-key></li>
-    <li class="white"><app-key></app-key></li>
-    <li class="black"><app-key></app-key></li>
-    <li class="white"><app-key></app-key></li>
+<ul class="keypad" >
+    <li  *ngFor="let key of scale" [ngClass]="{
+            'black': key.value[1]=='-',
+            'white': key.value[1]!='-'
+        }"
+    >
+        <app-key [key]="key"></app-key>
+    </li>
 </ul>

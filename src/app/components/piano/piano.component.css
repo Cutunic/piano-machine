@@ -1,10 +1,25 @@
 .piano{
+    background:linear-gradient(top,rgb(78, 67, 38) 0%,rgb(56, 49, 28) 100%);
     display: grid;
     grid-template-rows: repeat(2,auto);
-    width: 24em;
+    width: 50em;
     margin: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+    border-radius: 5px;
 }
 .settings{
     display: grid;
     grid-template-columns: repeat(3,auto);
+    background:linear-gradient(45deg,rgb(59, 50, 28) 0%,rgb(83, 72, 42) 100%);
+    border-radius: 5px 5px 0px 0px;
+
+    box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.247);
+}
+.settings div{
+    height: 60px;
+    display: grid;
+    align-items: center;
+    justify-items: center;
 }
