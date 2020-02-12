@@ -18,57 +18,50 @@ export class PianoService {
     }
   }
 
-  playAudio(keyValue: string, keyEvent? :string){
-    let path = '../../assets/piano-keys/'+keyValue+'.mp3';
-    console.log('keyValu in service :',keyValue, '  path : ' + path);
-    console.log('keyEvent in service :',keyEvent);
-    
-    if (keyEvent==undefined){
-      this.pianoPlay(path)
-    } else if (keyEvent){
-      this.handlePlayAudio(path,keyValue, keyEvent)
-    }
+  playAudio(keyValue: string,){
+    let path = this.createPath(keyValue);
+    this.pianoPlay(path);
   }
-  handlePlayAudio(path: string,keyValue: string, keyEvent: string){
-      if (
-        ((keyEvent==='q')&&(keyValue==='c3')) ||
-        ((keyEvent==='1')&&(keyValue==='c-3')) ||
-        ((keyEvent==='w')&&(keyValue==='d3')) ||
-        ((keyEvent==='2')&&(keyValue==='d-3')) ||
-        ((keyEvent==='e')&&(keyValue==='e3')) ||
-        ((keyEvent==='r')&&(keyValue==='f3')) ||
-        ((keyEvent==='4')&&(keyValue==='f-3')) ||
-        ((keyEvent==='t')&&(keyValue==='g3')) ||
-        ((keyEvent==='5')&&(keyValue==='g-3')) ||
-        ((keyEvent==='y')&&(keyValue==='a3')) ||
-        ((keyEvent==='6')&&(keyValue==='a-3')) ||
-        ((keyEvent==='u')&&(keyValue==='b3'))
-        ){
-        console.log('onKey(a) value: ', keyValue);
-        this.pianoPlay(path);
-    } else if (
-        ((keyEvent==='z')&&(keyValue==='c4')) ||
-        ((keyEvent==='s')&&(keyValue==='c-4')) ||
-        ((keyEvent==='x')&&(keyValue==='d4')) ||
-        ((keyEvent==='d')&&(keyValue==='d-4')) ||
-        ((keyEvent==='c')&&(keyValue==='e4')) ||
-        ((keyEvent==='v')&&(keyValue==='f4')) ||
-        ((keyEvent==='g')&&(keyValue==='f-4')) ||
-        ((keyEvent==='b')&&(keyValue==='g4')) ||
-        ((keyEvent==='h')&&(keyValue==='g-4')) ||
-        ((keyEvent==='n')&&(keyValue==='a4')) ||
-        ((keyEvent==='j')&&(keyValue==='a-4')) ||
-        ((keyEvent==='m')&&(keyValue==='b4'))
-              ){
-        console.log('onKey(a) value: ', keyValue);
-        this.pianoPlay(path);
+  getKeyValueOnPress(keyEvent: string){
+    let keyValue: string;
+    switch(keyEvent){
+      case 'q' : keyValue='c3'; break;
+      case '1' : keyValue='c-3'; break;
+      case 'w' : keyValue='d3'; break;
+      case '2' : keyValue='d-3'; break;
+      case 'e' : keyValue='e3'; break;
+      case 'r' : keyValue='f3'; break;
+      case '4' : keyValue='f-3'; break;
+      case 't' : keyValue='g3'; break;
+      case '5' : keyValue='g-3'; break;
+      case 'y' : keyValue='a3'; break;
+      case '6' : keyValue='a-3'; break;
+      case 'u' : keyValue='b3'; break;
+
+      case 'z' : keyValue='c4'; break;
+      case 's' : keyValue='c-4'; break;
+      case 'x' : keyValue='d4'; break;
+      case 'd' : keyValue='d-4'; break;
+      case 'c' : keyValue='e4'; break;
+      case 'v' : keyValue='f4'; break;
+      case 'g' : keyValue='f-4'; break;
+      case 'b' : keyValue='g4'; break;
+      case 'h' : keyValue='g-4'; break;
+      case 'n' : keyValue='a4'; break;
+      case 'j' : keyValue='a-4'; break;
+      case 'm' : keyValue='b4'; break;
     }
+    return keyValue;
+  }
+  
+  createPath(keyName: string){
+    return ('../../assets/piano-keys/'+keyName+'.mp3');
   }
   pianoPlay(path: string){
-    console.log('playAudio() :')
     let audio = new Audio();
     audio.src = path;
     audio.volume = 0.5;
     audio.play();
   }
+  
 }

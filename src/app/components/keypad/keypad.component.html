@@ -1,9 +1,9 @@
 <ul class="keypad" >
-    <li  *ngFor="let key of scale" [ngClass]="{
+    <li  *ngFor="let key of scale" [attr.id]="key.value" [ngClass]="{
             'black': key.value[1]=='-',
             'white': key.value[1]!='-'
         }"
     >
-        <app-key [key]="key"></app-key>
+        <app-key [key]="key" ></app-key>
     </li>
 </ul>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { PianoService } from '../../services/piano.service'
 
 @Component({
@@ -9,6 +9,14 @@ import { PianoService } from '../../services/piano.service'
 export class KeypadComponent implements OnInit {
   scaleSize: string = 'smal';
   scale: any[];
+
+  @HostListener('window: keydown', ['$event'])
+  handleKeypress(event: KeyboardEvent){
+    let keyValue: string = this.pianoService.getKeyValueOnPress(event.key);
+    this.toogleKeyActive(keyValue);
+    this.pianoService.playAudio(keyValue);
+  }
+
   constructor(private pianoService: PianoService) { }
 
   ngOnInit() {
@@ -16,4 +24,13 @@ export class KeypadComponent implements OnInit {
     console.log('keypad size: ',this.scaleSize,' keypad scale: ',this.scale);
   }
 
+  toogleKeyActive(targetKey:string){
+    let classColor: string;
+    if (targetKey[1]==='-'){ classColor = 'active-black';
+    } else { classColor = 'active-white';}
+    document.getElementById(targetKey).classList.add(classColor);
+    setTimeout(() => {
+      document.getElementById(targetKey).classList.remove(classColor);
+    }, 350);
+  }
 }
