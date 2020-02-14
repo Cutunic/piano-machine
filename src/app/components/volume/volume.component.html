@@ -1,1 +1,10 @@
-<p>volume works!</p>
+<div>
+    <p>Volume: {{ volumeValue }}</p>
+    <input  [(ngModel)]="volumeValue" 
+            (change)="onVolumeChange()" 
+            id="volume" 
+            class="volume" 
+            type="range" 
+            min='0' max='100' step='1'>
+    
+</div>

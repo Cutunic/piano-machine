@@ -1,0 +1,23 @@
+.switch-background{
+    height: 30px;
+    width: 80px;
+    background-color: black;
+    position: relative;
+}
+
+.switch-circle{
+    height: 24px;
+    width: 38px;
+    top: 3px;
+
+    position: absolute;
+    transition: all 0.5s ease;
+}
+.switch-on{
+    background-color: blue;
+    left: 39px;
+}
+.switch-off{
+    background-color: red;
+    left: 3px;
+}

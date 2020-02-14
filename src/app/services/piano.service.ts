@@ -6,7 +6,10 @@ import { Injectable } from '@angular/core';
 export class PianoService {
   smallScale: any[] = [{"value":'c3'},{"value":'c-3'},{"value":'d3'},{"value":'d-3'},{"value":'e3'},{"value":'f3'},{"value":'f-3'},{"value":'g3'},{"value":'g-3'},{"value":'a3'},{"value":'a-3'},{"value":'b3'}];
   bigScale: any[] = [{"value": 'c3'},{"value":'c-3'},{"value":'d3'},{"value":'d-3'},{"value":'e3'},{"value":'f3'},{"value":'f-3'},{"value":'g3'},{"value":'g-3'},{"value":'a3'},{"value":'a-3'},{"value":'b3'},{"value": 'c4'},{"value":'c-4'},{"value":'d4'},{"value":'d-4'},{"value":'e4'},{"value":'f4'},{"value":'f-4'},{"value":'g4'},{"value":'g-4'},{"value":'a4'},{"value":'a-4'},{"value":'b4'}];
-  
+  volume: number = 50;
+  power: boolean = false;
+  size: string = 'big';
+
   constructor() { }
   
   getScale(scaleSize:string){
@@ -19,8 +22,11 @@ export class PianoService {
   }
 
   playAudio(keyValue: string,){
-    let path = this.createPath(keyValue);
-    this.pianoPlay(path);
+    if (this.power){
+      let path = this.createPath(keyValue);
+      this.pianoPlay(path);
+    }
+    
   }
   getKeyValueOnPress(keyEvent: string){
     let keyValue: string;
@@ -60,8 +66,30 @@ export class PianoService {
   pianoPlay(path: string){
     let audio = new Audio();
     audio.src = path;
-    audio.volume = 0.5;
+    audio.volume = (this.volume/100);
     audio.play();
+  }
+  
+  setVolume(value: number){
+    this.volume = value;
+    console.log('volume in Service :', this.volume);
+  }
+  setPower(value: boolean){
+    this.power = value;
+    console.log('power in Service :', this.power);
+  }
+  setSize(value: string){
+    this.size = value;
+    console.log('size in Service :', this.size);
+  }
+  getVolume(){
+    return this.volume;
+  }
+  getPower(){
+    return this.power;
+  }
+  getSize(){
+    return this.size;
   }
   
 }

@@ -10,6 +10,7 @@ export class KeypadComponent implements OnInit {
   scaleSize: string = 'smal';
   scale: any[];
 
+    // need to create Subject and observable in Service on size; then i can observe changes on scaleSize
   @HostListener('window: keydown', ['$event'])
   handleKeypress(event: KeyboardEvent){
     let keyValue: string = this.pianoService.getKeyValueOnPress(event.key);
@@ -26,8 +27,10 @@ export class KeypadComponent implements OnInit {
 
   toogleKeyActive(targetKey:string){
     let classColor: string;
+    
     if (targetKey[1]==='-'){ classColor = 'active-black';
     } else { classColor = 'active-white';}
+    
     document.getElementById(targetKey).classList.add(classColor);
     setTimeout(() => {
       document.getElementById(targetKey).classList.remove(classColor);
