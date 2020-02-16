@@ -9,15 +9,17 @@ import { PianoService } from '../../services/piano.service';
 export class SizeComponent implements OnInit {
   size: string;
 
-  constructor(private pianoService: PianoService) { }
+  constructor(private pianoService: PianoService) { 
+    this.pianoService.sizeObs.subscribe(value=>{
+      this.size = value;
+    })
+  }
 
   ngOnInit() {
-    this.size = this.pianoService.getSize();
-    console.log('onInit Size in size : ',this.size);
   }
+
   onSizeChange(value: string){
     this.size = value;
     this.pianoService.setSize(this.size);
-    console.log(value);
   }
 }

@@ -7,8 +7,11 @@ import { PianoService } from '../../services/piano.service'
   styleUrls: ['./keypad.component.css']
 })
 export class KeypadComponent implements OnInit {
-  scaleSize: string = 'smal';
+  scaleSize: string;
   scale: any[];
+  width: number;
+  resizedToSmall: boolean = false;
+  resizedToBig: boolean = false;
 
     // need to create Subject and observable in Service on size; then i can observe changes on scaleSize
   @HostListener('window: keydown', ['$event'])
@@ -17,24 +20,23 @@ export class KeypadComponent implements OnInit {
     this.toogleKeyActive(keyValue);
     this.pianoService.playAudio(keyValue);
   }
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    this.width = event.target.outerWidth;
+    this.onWindowResize();
+  }
 
   constructor(private pianoService: PianoService) { 
     this.pianoService.sizeObs.subscribe(value=>{
       this.scaleSize = value;
-
       this.scale = this.pianoService.getScale(this.scaleSize);
-      console.log('onChanges scaleSize :', this.scaleSize);
-      console.log('onChanges scale :', this.scale);
     })
   }
 
   ngOnInit() {
     this.scale = this.pianoService.getScale(this.scaleSize);
-    console.log('keypad size: ',this.scaleSize,' keypad scale: ',this.scale);
-  }
-  ngOnChanges(){
-    
-
+    this.width = window.outerWidth;
+    this.onWindowResize();
   }
   toogleKeyActive(targetKey:string){
     let classColor: string;
@@ -46,5 +48,23 @@ export class KeypadComponent implements OnInit {
     setTimeout(() => {
       document.getElementById(targetKey).classList.remove(classColor);
     }, 350);
+  }
+  onWindowResize(){
+    if ((this.width<501)&&(this.resizedToSmall===false)){
+      this.pianoService.setSize('small');
+      this.resizedVariable();
+    } else if ((this.width>501)&&(this.resizedToBig===false)){
+      this.pianoService.setSize('big');
+      this.resizedVariable();
+    }
+  }
+  resizedVariable(){
+    if (this.scaleSize=='small'){
+      this.resizedToSmall = true;
+      this.resizedToBig = false;
+    } else if (this.scaleSize==='big'){
+      this.resizedToSmall = false;
+      this.resizedToBig = true;
+    }
   }
 }

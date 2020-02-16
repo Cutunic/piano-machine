@@ -7,8 +7,8 @@ import { Subject } from 'rxjs';
 export class PianoService {
   smallScale: any[] = [{"value":'c3'},{"value":'c-3'},{"value":'d3'},{"value":'d-3'},{"value":'e3'},{"value":'f3'},{"value":'f-3'},{"value":'g3'},{"value":'g-3'},{"value":'a3'},{"value":'a-3'},{"value":'b3'}];
   bigScale: any[] = [{"value": 'c3'},{"value":'c-3'},{"value":'d3'},{"value":'d-3'},{"value":'e3'},{"value":'f3'},{"value":'f-3'},{"value":'g3'},{"value":'g-3'},{"value":'a3'},{"value":'a-3'},{"value":'b3'},{"value": 'c4'},{"value":'c-4'},{"value":'d4'},{"value":'d-4'},{"value":'e4'},{"value":'f4'},{"value":'f-4'},{"value":'g4'},{"value":'g-4'},{"value":'a4'},{"value":'a-4'},{"value":'b4'}];
-  volume: number = 50;
-  power: boolean = false;
+  volume: number = 20;
+  power: boolean = true;
   size: string = 'big';
 
   private _size: Subject<string> = new Subject;
@@ -19,7 +19,6 @@ export class PianoService {
   }
   
   getScale(scaleSize:string){
-    console.log('getScale service: ', scaleSize);
     if (scaleSize==='small'){
       return this.smallScale;
     } else {

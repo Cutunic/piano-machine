@@ -1,9 +1,7 @@
 .keypad{
     height: 20em;
-    width: 42em;
     margin: auto;
     padding-top: 40px;
-
     
 }
 .white{
@@ -35,7 +33,11 @@
     
     box-shadow: 0 -5px 2px 3px rgba(0,0,0,0.6) inset,
                 0 2px 4px rgba(0,0,0,0.5);
-    background:linear-gradient(45deg,rgb(34, 34, 34) 0%,rgb(85, 85, 85) 100%)
+    background:linear-gradient(45deg,rgb(34, 34, 34) 0%,rgb(85, 85, 85) 100%);
+
+    
+    position: relative;
+    top: -6.3em;
 }
 .black:active, .active-black{
     box-shadow: -1px -1px 2px rgba(255,255,255,0.2) inset,
@@ -45,18 +47,16 @@
 }
 ul{
     position: relative;
-    
 }
 ul li{
     list-style: none;
-    position: relative;
-    float: left;
+    display: inline-block;
 }
 ul li:first-child, ul li:last-child{
     border-radius: 5px;
 }
 @media(max-width: 500px){
     .keypad{
-        width: 22em;
+        width: 21em;
     }
 }

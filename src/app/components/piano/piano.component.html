@@ -1,8 +1,11 @@
-<div class="piano">
-    <div class="settings">
+<div class="piano" [ngClass]="(size==='big')?'piano-big':'piano-small'">
+    <div class="settings" [ngClass]="(size==='big')?'piano-big':'piano-small'">
         <div><app-power></app-power></div>
         <div><app-volume></app-volume></div>
         <div><app-size></app-size></div>
     </div>
-    <app-keypad></app-keypad>
+    <div class="app-keypad">
+        <app-keypad></app-keypad>
+    </div>
+    
 </div>
