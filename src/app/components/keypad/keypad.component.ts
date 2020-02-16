@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, OnChanges, HostListener } from '@angular/core';
 import { PianoService } from '../../services/piano.service'
 
 @Component({
@@ -18,13 +18,24 @@ export class KeypadComponent implements OnInit {
     this.pianoService.playAudio(keyValue);
   }
 
-  constructor(private pianoService: PianoService) { }
+  constructor(private pianoService: PianoService) { 
+    this.pianoService.sizeObs.subscribe(value=>{
+      this.scaleSize = value;
+
+      this.scale = this.pianoService.getScale(this.scaleSize);
+      console.log('onChanges scaleSize :', this.scaleSize);
+      console.log('onChanges scale :', this.scale);
+    })
+  }
 
   ngOnInit() {
     this.scale = this.pianoService.getScale(this.scaleSize);
     console.log('keypad size: ',this.scaleSize,' keypad scale: ',this.scale);
   }
+  ngOnChanges(){
+    
 
+  }
   toogleKeyActive(targetKey:string){
     let classColor: string;
     

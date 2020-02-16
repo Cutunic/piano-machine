@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,12 @@ export class PianoService {
   power: boolean = false;
   size: string = 'big';
 
-  constructor() { }
+  private _size: Subject<string> = new Subject;
+  public sizeObs = this._size.asObservable();
+
+  constructor() { 
+    this._size.next(this.size);
+  }
   
   getScale(scaleSize:string){
     console.log('getScale service: ', scaleSize);
@@ -80,6 +86,7 @@ export class PianoService {
   }
   setSize(value: string){
     this.size = value;
+    this._size.next(value);
     console.log('size in Service :', this.size);
   }
   getVolume(){
