@@ -66,7 +66,7 @@ export class PianoService {
   }
   
   createPath(keyName: string){
-    return ('../../assets/piano-keys/'+keyName+'.mp3');
+    return ('assets/piano-keys/'+keyName+'.mp3');
   }
   pianoPlay(path: string){
     let audio = new Audio();
