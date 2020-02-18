@@ -34,12 +34,12 @@
     align-items: center;
     justify-items: center;
 }
-
 @media(max-width:500px){
     .settings{
-        padding-left: 10px;
-        padding-right: 20px;
         grid-template-columns: auto;
         grid-template-rows: repeat(3,auto);
+    }
+    .piano-big, .piano-small{
+        width: 90vw;
     }
 }

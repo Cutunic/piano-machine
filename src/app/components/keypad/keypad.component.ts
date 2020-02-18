@@ -22,7 +22,7 @@ export class KeypadComponent implements OnInit {
   }
   @HostListener('window:resize', ['$event'])
   onResize(event) {
-    this.width = event.target.outerWidth;
+    this.width = event.target.innerWidth;
     this.onWindowResize();
   }
 
@@ -35,7 +35,7 @@ export class KeypadComponent implements OnInit {
 
   ngOnInit() {
     this.scale = this.pianoService.getScale(this.scaleSize);
-    this.width = window.outerWidth;
+    this.width = window.innerWidth;
     this.onWindowResize();
   }
   toogleKeyActive(targetKey:string){

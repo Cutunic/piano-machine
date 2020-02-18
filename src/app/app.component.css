@@ -2,5 +2,5 @@
     display: grid;
     grid-template-rows: repeat(3,auto);
     z-index: -1;
-    width: 99vw;
+    width: 100%;
 }
