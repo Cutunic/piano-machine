@@ -13,7 +13,6 @@ export class KeypadComponent implements OnInit {
   resizedToSmall: boolean = false;
   resizedToBig: boolean = false;
 
-    // need to create Subject and observable in Service on size; then i can observe changes on scaleSize
   @HostListener('window: keydown', ['$event'])
   handleKeypress(event: KeyboardEvent){
     let keyValue: string = this.pianoService.getKeyValueOnPress(event.key);
@@ -23,13 +22,16 @@ export class KeypadComponent implements OnInit {
   @HostListener('window:resize', ['$event'])
   onResize(event) {
     this.width = event.target.innerWidth;
+    
     this.onWindowResize();
+    this.resizeHeight();
   }
 
   constructor(private pianoService: PianoService) { 
     this.pianoService.sizeObs.subscribe(value=>{
       this.scaleSize = value;
       this.scale = this.pianoService.getScale(this.scaleSize);
+      this.resizeHeight();
     })
   }
 
@@ -57,6 +59,7 @@ export class KeypadComponent implements OnInit {
       this.pianoService.setSize('big');
       this.resizedVariable();
     }
+    
   }
   resizedVariable(){
     if (this.scaleSize=='small'){
@@ -65,6 +68,13 @@ export class KeypadComponent implements OnInit {
     } else if (this.scaleSize==='big'){
       this.resizedToSmall = false;
       this.resizedToBig = true;
+    }
+  }
+  resizeHeight(){
+    if ((this.width<501)&&(this.scaleSize==='big')){
+      document.getElementsByClassName('keypad')[0].classList.add('keypad-height-mobile');
+    } else {
+      document.getElementsByClassName('keypad')[0].classList.remove('keypad-height-mobile');
     }
   }
 }

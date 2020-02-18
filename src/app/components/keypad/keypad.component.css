@@ -3,6 +3,9 @@
     margin: auto;
     padding-top: 40px;
 }
+.keypad-height-mobile{
+    height: 26em !important;
+}
 .white{
     height: 14em;
     width: 3em;
